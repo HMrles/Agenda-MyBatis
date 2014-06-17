@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Contacto">
+    <resultMap type="cl.mybatis.pojos.Contacto" id="resultContacto">
+        <id property="id" column="id"/>
+        <result property="nombre" column="nombre"/>
+        <result property="apellido" column="apellido"/>
+        <result property="numero" column="numero"/>
+    </resultMap>
+    
+    <select id="obtenerContactos" statementType="CALLABLE" resultMap="resultContacto" >
+        call obtenerContactos()
+    </select>
+    
+    <insert id="guardarContacto" statementType="CALLABLE" parameterType="cl.mybatis.pojos.Contacto">
+        call guardarContacto(#{nombre},#{apellido},#{numero})
+    </insert>
+    
+    
+    <insert id="insertarContacto" useGeneratedKeys="true" keyProperty="id" parameterType="cl.mybatis.pojos.Contacto">
+        insert into contacto(nombre, apellido, numero) values(#{nombre}, #{apellido}, #{numero})        
+    </insert>
+    <select id="getContactos" resultType="cl.mybatis.pojos.Contacto">
+        select * from contacto
+    </select>
+
+    
+    
+</mapper>
